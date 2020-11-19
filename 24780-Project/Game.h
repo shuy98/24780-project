@@ -33,11 +33,7 @@ class Game {
     }
     int getCurrPlayerID() const { return currPlayerID; }
     Player getCurrPlayer() {
-        for (Player &p : players) {
-            if (currPlayerID == p.getID()) {
-                return p;
-            }
-        }
+        return players.at(currPlayerID);
     }
     Property getProperty(int propertyPos) {
         for (Property &p : properties) {

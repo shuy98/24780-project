@@ -39,7 +39,9 @@ class Dice {
             glDrawPixels(png.wid, png.hei, GL_RGBA, GL_UNSIGNED_BYTE, png.rgba);
         }
         _i++;
-         if (_i >= pngs.size()) {_i = 0;}
+        if (_i >= (int)pngs.size()) {
+            _i = 0;
+        }
         return;
     };
     /**
@@ -61,7 +63,7 @@ class Dice {
      * @brief Return a random ranging from 1 to 6.
      */
     int Roll() {
-        int curr_time = time(NULL);
+        int curr_time = (int)time(NULL);
         srand(curr_time);
         _r = rand() % 6 + 1;
         return _r;
@@ -75,8 +77,8 @@ class Dice {
     int _LoadImage() {
         pngs.resize(8);
         for (int i = 0; i < 8; i++) {
-            std::string fname =
-                FILE_PATH + std::string("roll") + std::to_string(i+1) + ".png";
+            std::string fname = FILE_PATH + std::string("roll") +
+                                std::to_string(i + 1) + ".png";
             // YsRawPngDecoder png;
             if (YSOK == pngs[i].Decode(fname.c_str())) {
                 pngs[i].Flip();

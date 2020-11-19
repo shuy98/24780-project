@@ -5,7 +5,7 @@
 #include "Game.h"
 #include "Player.h"
 #include "Dice.hpp"
-//#include "GamePiece.hpp"
+#include "GamePiece.hpp"
 
 void DrawRectangle(int x, int y, int dx, int dy, int r, int g,
                    int b) // x and y given by top left corner
@@ -20,7 +20,7 @@ void DrawRectangle(int x, int y, int dx, int dy, int r, int g,
     glEnd();
 }
 
-void DrawGameSpaces() // PropertySoldState)
+void DrawGameSpaces(const std::vector<Player> &players) // PropertySoldState)
 {
     int GSx[20];
     int GSy[20];
@@ -120,15 +120,28 @@ void DrawGameSpaces() // PropertySoldState)
                       GSb[i]);
     }
 
-    { // for (int i = 0; i < 20; ++i)
-      //{
-      //	std::cout << GSx[i] << "   " << GSy[i] << std::endl;
-      //}
+    for (const Player &p : players) {
+        int playerID = p.getID();
+        int playerPos = p.getPosition();
+        GamePiece gp = GamePiece(playerID + 1);
+        int x = 0;
+        int y = 0;
+        if (playerID == 0) {
+            x = GSx[playerPos] + 8;
+            y = GSy[playerPos] + 8;
+        } else if (playerID == 1) {
+            x = GSx[playerPos] + 66;
+            y = GSy[playerPos] + 8;
+        } else if (playerID == 2) {
+            x = GSx[playerPos] + 8;
+            y = GSy[playerPos] + 66;
+        } else if (playerID == 3) {
+            x = GSx[playerPos] + 66;
+            y = GSy[playerPos] + 66;
+        }
+        gp.Draw(x, y);
     }
 
-    // color and position for each space
-    // Determine color manually, or tie it to space type?
-    // properties need state variable for sold or not
 }
 
 void DrawPlayerStats(const std::vector<Player> &players,
@@ -245,7 +258,7 @@ void DrawBuyButtons() {
     // no button
     DrawRectangle(noX1, noY1, WidB, HeiB, 150, 150, 150);
     glColor3ub(0, 0, 0);
-    glRasterPos2i(1097.5, 527);
+    glRasterPos2i((GLint)1097.5, 527);
     YsGlDrawFontBitmap10x14("No");
 }
 
@@ -288,7 +301,7 @@ int main(void) {
         int key = FsInkey();
 
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-        DrawGameSpaces();
+        DrawGameSpaces(game.getPlayers());
         DrawPlayerStats(game.getPlayers(), game.getProperties());
         int lb, mb, rb, mx, my;
         auto event = FsGetMouseEvent(lb, mb, rb, mx, my);
