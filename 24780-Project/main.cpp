@@ -7,6 +7,556 @@
 #include "Dice.hpp"
 #include "GamePiece.hpp"
 
+int GSx[20];
+int GSy[20];
+
+void DrawRect(int x, int y, int size, int color) {
+    if (color == 1) {
+        glColor3ub(0, 0, 0); // black
+    } else if (color == 2) {
+        glColor3ub(255, 215, 0); // gold
+    } else if (color == 3) {
+        glColor3ub(255, 140, 0);
+    } else if (color == 4) {
+        glColor3ub(255, 165, 0);
+    } else if (color == 5) {
+        glColor3ub(27, 132, 44);
+    } else if (color == 6) {
+        glColor3ub(255, 255, 255);
+    } else {
+        glColor3ub(222, 13, 13);
+    }
+    glBegin(GL_POLYGON);
+    glVertex2i(x, y);
+    glVertex2i(x + size, y);
+    glVertex2i(x + size, y + size);
+    glVertex2i(x, y + size);
+    glEnd();
+}
+
+void DrawRect_1(int x, int y, int size, int color) {
+    if (color == 1) {
+        glColor3ub(0, 0, 0); // black
+    } else if (color == 2) {
+        glColor3ub(153, 255, 255); // tiffany blue
+    } else if (color == 3) {
+        glColor3ub(255, 153, 153); // pink roof
+    } else if (color == 4)         // white window
+    {
+        glColor3ub(255, 255, 255);
+    } else // background grey
+    {
+        glColor3ub(224, 224, 224);
+    }
+    glBegin(GL_POLYGON);
+    glVertex2i(x, y);
+    glVertex2i(x + size, y);
+    glVertex2i(x + size, y + size);
+    glVertex2i(x, y + size);
+    glEnd();
+}
+
+void DrawRect_2(int x, int y, int size, int color) {
+    if (color == 1) {
+        glColor3ub(0, 0, 0); // black
+    } else if (color == 2) {
+        glColor3ub(153, 153, 255); // tiffany blue
+    } else if (color == 3) {
+        glColor3ub(255, 0, 0); // pink roof
+    } else if (color == 4)     // white window
+    {
+        glColor3ub(102, 178, 255);
+    } else // background grey
+    {
+        glColor3ub(224, 224, 224);
+    }
+    glBegin(GL_POLYGON);
+    glVertex2i(x, y);
+    glVertex2i(x + size, y);
+    glVertex2i(x + size, y + size);
+    glVertex2i(x, y + size);
+    glEnd();
+}
+
+void DrawRect_3(int x, int y, int size, int color) {
+    if (color == 1) // black 1
+    {
+        glColor3ub(0, 0, 0); // black
+    } else if (color == 2)   // blue roof @
+    {
+        glColor3ub(0, 76, 152);
+    } else if (color == 3) // garage /
+    {
+        glColor3ub(153, 76, 0);
+    } else if (color == 4) // side roof .
+    {
+        glColor3ub(51, 153, 255);
+    } else if (color == 5) // background grey $
+    {
+        glColor3ub(224, 224, 224);
+    } else if (color == 6) // windon !
+    {
+        glColor3ub(204, 255, 255);
+    } else // ' '
+    {
+        glColor3ub(255, 102, 102);
+    }
+    glBegin(GL_POLYGON);
+    glVertex2i(x, y);
+    glVertex2i(x + size, y);
+    glVertex2i(x + size, y + size);
+    glVertex2i(x, y + size);
+    glEnd();
+}
+
+void DrawRect_4(int x, int y, int size, int color) {
+    if (color == 1) // black 1
+    {
+        glColor3ub(0, 0, 0);
+    } else if (color == 2) // pink roof $
+    {
+        glColor3ub(255, 102, 102);
+    } else if (color == 3) // white window .
+    {
+        glColor3ub(255, 255, 255);
+    } else if (color == 4) // background grey @
+    {
+        glColor3ub(224, 224, 224);
+    } else if (color == 5) // door !
+    {
+        glColor3ub(255, 0, 0);
+    }
+
+    else // purple
+    {
+        glColor3ub(178, 102, 255);
+    }
+    glBegin(GL_POLYGON);
+    glVertex2i(x, y);
+    glVertex2i(x + size, y);
+    glVertex2i(x + size, y + size);
+    glVertex2i(x, y + size);
+    glEnd();
+}
+
+void DrawRect_5(int x, int y, int size, int color) {
+    if (color == 1) // black 1
+    {
+        glColor3ub(0, 0, 0);
+    } else if (color == 2) // roof /
+    {
+        glColor3ub(102, 51, 0);
+    } else if (color == 3) // white window .
+    {
+        glColor3ub(255, 255, 255);
+    } else if (color == 4) // background grey @
+    {
+        glColor3ub(224, 224, 224);
+    } else if (color == 5) // door !
+    {
+        glColor3ub(255, 0, 0);
+    } else {
+        glColor3ub(255, 204, 153);
+    }
+    glBegin(GL_POLYGON);
+    glVertex2i(x, y);
+    glVertex2i(x + size, y);
+    glVertex2i(x + size, y + size);
+    glVertex2i(x, y + size);
+    glEnd();
+}
+
+void DrawRect_6(int x, int y, int size, int color) {
+    if (color == 1) // black 1
+    {
+        glColor3ub(0, 0, 0);
+    } else if (color == 2) // roof .
+    {
+        glColor3ub(102, 51, 0);
+    } else if (color == 3) // !
+    {
+        glColor3ub(255, 0, 0);
+    } else {
+        glColor3ub(255, 215, 56);
+    }
+    glBegin(GL_POLYGON);
+    glVertex2i(x, y);
+    glVertex2i(x + size, y);
+    glVertex2i(x + size, y + size);
+    glVertex2i(x, y + size);
+    glEnd();
+}
+void DrawCoin(int i, int j) {
+    unsigned char pattern[] = {
+
+        "   11111   "
+        "  1.....1  "
+        " 1..@@@@@1 "
+        "1..@@@@@@/1"
+        "1..11@@1@/1"
+        "1.11@1@11@1"
+        "1..1@@11@/1"
+        "1..@@@@@@/1"
+        " 1.@@@@@/1 "
+        "  1/////1  "
+        "   11111   "
+
+    };
+    int x, y;
+    glBegin(GL_POLYGON);
+    for (x = 0; x < 11; x++) {
+        for (y = 0; y < 11; y++) {
+
+            int index = x * 11 + y;
+            if (i != 0 && j == 0) {
+                int a = i + (x * 11);
+                int b = y * 11;
+
+                if ('1' == pattern[index]) {
+                    DrawRect(a, b, 11, 1);
+                } else if ('.' == pattern[index]) {
+                    DrawRect(a, b, 11, 2);
+                } else if ('/' == pattern[index]) {
+                    DrawRect(a, b, 11, 3);
+                } else if ('@' == pattern[index]) {
+                    DrawRect(a, b, 11, 4);
+                } else {
+                    DrawRect(a, b, 11, 5);
+                }
+            } else if (i != 0 && j != 0) {
+                int a = i + (x * 11);
+                int b = j + (y * 11);
+
+                if ('1' == pattern[index]) {
+                    DrawRect(a, b, 11, 1);
+                } else if ('.' == pattern[index]) {
+                    DrawRect(a, b, 11, 2);
+                } else if ('/' == pattern[index]) {
+                    DrawRect(a, b, 11, 3);
+                } else if ('@' == pattern[index]) {
+                    DrawRect(a, b, 11, 4);
+                } else {
+                    DrawRect(a, b, 11, 5);
+                }
+            } else {
+                int a = x * 11;
+                int b = j + (y * 11);
+                if ('1' == pattern[index]) {
+                    DrawRect(a, b, 11, 1);
+                } else if ('.' == pattern[index]) {
+                    DrawRect(a, b, 11, 2);
+                } else if ('/' == pattern[index]) {
+                    DrawRect(a, b, 11, 3);
+                } else if ('@' == pattern[index]) {
+                    DrawRect(a, b, 11, 4);
+                } else {
+                    DrawRect(a, b, 11, 5);
+                }
+            }
+        }
+    }
+    //glEnd();
+    glFlush();
+}
+
+void DrawBrokenCoin(int i, int j) {
+    unsigned char pattern[] = {
+
+        "   11!!1   "
+        "  1.!!..1  "
+        " 1.!!@@@@1 "
+        "1.!!!@@@@/1"
+        "1..!!@@1@/1"
+        "1.11!!@11@1"
+        "1..1@!!1@/1"
+        "1..@@!!!@/1"
+        " 1.@@!!@/1 "
+        "  1/!!//1  "
+        "   11!!1   "
+
+    };
+    int x, y;
+    glBegin(GL_POLYGON);
+    for (x = 0; x < 11; x++) {
+        for (y = 0; y < 11; y++) {
+
+            int index = x * 11 + y;
+            if (i != 0 && j == 0) {
+                int a = i + (x * 11);
+                int b = y * 11;
+
+                if ('1' == pattern[index]) {
+                    DrawRect(a, b, 11, 1);
+                } else if ('.' == pattern[index]) {
+                    DrawRect(a, b, 11, 2);
+                } else if ('/' == pattern[index]) {
+                    DrawRect(a, b, 11, 3);
+                } else if ('@' == pattern[index]) {
+                    DrawRect(a, b, 11, 4);
+                } else if ('!' == pattern[index]) {
+                    DrawRect(a, b, 11, 0);
+                } else {
+                    DrawRect(a, b, 11, 0);
+                }
+            } else if (i != 0 && j != 0) {
+                int a = i + (x * 11);
+                int b = j + (y * 11);
+
+                if ('1' == pattern[index]) {
+                    DrawRect(a, b, 11, 1);
+                } else if ('.' == pattern[index]) {
+                    DrawRect(a, b, 11, 2);
+                } else if ('/' == pattern[index]) {
+                    DrawRect(a, b, 11, 3);
+                } else if ('@' == pattern[index]) {
+                    DrawRect(a, b, 11, 4);
+                } else if ('!' == pattern[index]) {
+                    DrawRect(a, b, 11, 0);
+                } else {
+                    DrawRect(a, b, 11, 0);
+                }
+            } else {
+                int a = x * 11;
+                int b = j + (y * 11);
+                if ('1' == pattern[index]) {
+                    DrawRect(a, b, 11, 1);
+                } else if ('.' == pattern[index]) {
+                    DrawRect(a, b, 11, 2);
+                } else if ('/' == pattern[index]) {
+                    DrawRect(a, b, 11, 3);
+                } else if ('@' == pattern[index]) {
+                    DrawRect(a, b, 11, 4);
+                } else if ('!' == pattern[index]) {
+                    DrawRect(a, b, 11, 0);
+                } else {
+                    DrawRect(a, b, 11, 0);
+                }
+            }
+        }
+    }
+    //glEnd();
+    glFlush();
+}
+
+void DrawProp_1(int i, int j) {
+    char pattern[] = {
+
+        "     1     "
+        "    111111 "
+        "   11@...1 "
+        "  11@@...1 "
+        " 11@@@//.1 "
+        "11@@@@//.1 "
+        " 11@@@//.1 "
+        "  11@@...1 "
+        "   11@...1 "
+        "    111111 "
+        "     1     "
+
+    };
+
+    int size = 11;
+    glBegin(GL_POLYGON);
+    for (int x = 0; x < 11; x++) {
+        for (int y = 0; y < 11; y++) {
+            int index = x * 11 + y;
+            int a = i + (size * x);
+            int b = size * y;
+            if ('1' == pattern[index]) {
+                DrawRect_1(a, b, size, 1);
+            } else if ('.' == pattern[index]) {
+                DrawRect_1(a, b, size, 2);
+            } else if ('/' == pattern[index]) {
+                DrawRect_1(a, b, size, 4);
+            } else if ('@' == pattern[index]) {
+                DrawRect_1(a, b, size, 3);
+            } else {
+                DrawRect_1(a, b, size, 0);
+            }
+        }
+    }
+    //glEnd();
+    glFlush();
+}
+
+void DrawProp_2(int i, int j) {
+    char pattern[] = {"           "
+                      " 1111111111"
+                      " 1        1"
+                      " 1 ./  ./ 1"
+                      " 1 /.  /. 1"
+                      " 1        1"
+                      " 1 ./  ./ 1"
+                      " 1 /.  /. 1"
+                      " 1        1"
+                      " 1111111111"
+                      "           "
+
+    };
+    int size = 11;
+    for (int x = 0; x < 11; x++) {
+        for (int y = 0; y < 11; y++) {
+            int index = x * 11 + y;
+            int a = i + (size * x);
+            int b = size * y;
+            if ('1' == pattern[index]) {
+                DrawRect_2(a, b, size, 1);
+            } else if ('.' == pattern[index]) {
+                DrawRect_2(a, b, size, 2);
+            } else if ('/' == pattern[index]) {
+                DrawRect_2(a, b, size, 4);
+            } else if ('@' == pattern[index]) {
+                DrawRect_2(a, b, size, 3);
+            } else {
+                DrawRect_2(a, b, size, 0);
+            }
+        }
+    }
+    glFlush();
+}
+
+void DrawProp_3(int i, int j) {
+    char pattern[] = {"$@@@111111$"
+                      "$@.@  ///1$"
+                      "$@.@  ///1$"
+                      "$@.@  ///1$"
+                      "$@@@111111$"
+                      "$@@@     1$"
+                      "$@@@!!   1$"
+                      "@@@@!! 111$"
+                      "$@@@!!   1$"
+                      "$$@@     1$"
+                      "$$$@111111$"};
+    int size = 11;
+    for (int x = 0; x < 11; x++) {
+        for (int y = 0; y < 11; y++) {
+            int index = x * 11 + y;
+            int a = i + (size * x);
+            int b = j + (size * y);
+            if ('1' == pattern[index]) {
+                DrawRect_3(a, b, size, 1);
+            } else if ('.' == pattern[index]) {
+                DrawRect_3(a, b, size, 4);
+            } else if ('/' == pattern[index]) {
+                DrawRect_3(a, b, size, 3);
+            } else if ('@' == pattern[index]) {
+                DrawRect_3(a, b, size, 2);
+            } else if ('!' == pattern[index]) {
+                DrawRect_3(a, b, size, 6);
+            } else if ('$' == pattern[index]) {
+                DrawRect_3(a, b, size, 5);
+            } else {
+                DrawRect_3(a, b, size, 0);
+            }
+        }
+    }
+    glFlush();
+}
+
+void DrawProp_4(int i, int j) {
+    char pattern[] = {"@@@@@@@@@@@"
+                      "@@@11111111"
+                      "@@11 1 1  1"
+                      "@1$1 1 1  1"
+                      "1$$1 1 1  1"
+                      "1$$1.1.1!!1"
+                      "1$$1.1.1!!1"
+                      "1$$1 1 1  1"
+                      "@1$1 1 1  1"
+                      "@@11 1 1  1"
+                      "@@@11111111"};
+    int size = 11;
+    for (int x = 0; x < 11; x++) {
+        for (int y = 0; y < 11; y++) {
+            int index = x * 11 + y;
+            int a = i + (size * x);
+            int b = j + (size * y);
+            if ('1' == pattern[index]) {
+                DrawRect_4(a, b, size, 1);
+            } else if ('.' == pattern[index]) {
+                DrawRect_4(a, b, size, 3);
+            } else if ('@' == pattern[index]) {
+                DrawRect_4(a, b, size, 4);
+            } else if ('!' == pattern[index]) {
+                DrawRect_4(a, b, size, 5);
+            } else if ('$' == pattern[index]) {
+                DrawRect_4(a, b, size, 2);
+            } else {
+                DrawRect_4(a, b, size, 0);
+            }
+        }
+    }
+    glFlush();
+}
+
+void DrawProp_5(int i, int j) {
+    char pattern[] = {"@@111111111"
+                      "@@1//1    1"
+                      "111//1... 1"
+                      "111//1... 1"
+                      "@@1//1  !!!"
+                      "@@1//1  !!!"
+                      "@@1//1  !!!"
+                      "@@1//1... 1"
+                      "@@1//1... 1"
+                      "@@1//1    1"
+                      "@@111111111"};
+    int size = 11;
+    for (int x = 0; x < 11; x++) {
+        for (int y = 0; y < 11; y++) {
+            int index = x * 11 + y;
+            int a = size * x;
+            int b = j + (size * y);
+            if ('1' == pattern[index]) {
+                DrawRect_5(a, b, size, 1);
+            } else if ('.' == pattern[index]) {
+                DrawRect_5(a, b, size, 3);
+            } else if ('@' == pattern[index]) {
+                DrawRect_5(a, b, size, 4);
+            } else if ('!' == pattern[index]) {
+                DrawRect_5(a, b, size, 5);
+            } else if ('/' == pattern[index]) {
+                DrawRect_5(a, b, size, 2);
+            } else {
+                DrawRect_5(a, b, size, 0);
+            }
+        }
+    }
+    glFlush();
+}
+
+void DrawStart(int i, int j) {
+    char pattern[] = {"           "
+                      "   !       "
+                      "  !!       "
+                      " !!!  111  "
+                      " !!!  111  "
+                      " .....111  "
+                      " .....111  "
+                      "      111  "
+                      "      111  "
+                      "           "
+                      "           "};
+    int size = 11;
+    for (int x = 0; x < 11; x++) {
+        for (int y = 0; y < 11; y++) {
+            int index = x * 11 + y;
+            int a = i + (size * x);
+            int b = j + (size * y);
+            if ('1' == pattern[index]) {
+                DrawRect_6(a, b, size, 1);
+            } else if ('.' == pattern[index]) {
+                DrawRect_6(a, b, size, 2);
+            } else if ('!' == pattern[index]) {
+                DrawRect_6(a, b, size, 3);
+            } else {
+                DrawRect_6(a, b, size, 0);
+            }
+        }
+    }
+    glFlush();
+}
+
 void DrawRectangle(int x, int y, int dx, int dy, int r, int g,
                    int b) // x and y given by top left corner
 {
@@ -20,10 +570,34 @@ void DrawRectangle(int x, int y, int dx, int dy, int r, int g,
     glEnd();
 }
 
-void DrawGameSpaces(const std::vector<Player> &players) // PropertySoldState)
+void DrawGamePieces(const std::vector<Player>& players) {
+    for (const Player &p : players) {
+        int playerID = p.getID();
+        int playerPos = p.getPosition();
+        GamePiece gp = GamePiece(playerID + 1);
+        int x = 0;
+        int y = 0;
+        if (playerID == 0) {
+            x = GSx[playerPos] + 8;
+            y = GSy[playerPos] + 8;
+        } else if (playerID == 1) {
+            x = GSx[playerPos] + 66;
+            y = GSy[playerPos] + 8;
+        } else if (playerID == 2) {
+            x = GSx[playerPos] + 8;
+            y = GSy[playerPos] + 66;
+        } else if (playerID == 3) {
+            x = GSx[playerPos] + 66;
+            y = GSy[playerPos] + 66;
+        }
+        gp.Draw(x, y);
+    }
+}
+
+void DrawGameSpaces() // PropertySoldState)
 {
-    int GSx[20];
-    int GSy[20];
+    /*int GSx[20];
+    int GSy[20];*/
 
     int GSdeltax = 125;
     int GSdeltay = 125;
@@ -72,9 +646,9 @@ void DrawGameSpaces(const std::vector<Player> &players) // PropertySoldState)
     int BLANKg = 126;
     int BLANKb = 255;
 
-    int PROPAVAILr = 0;
-    int PROPAVAILg = 0;
-    int PROPAVAILb = 0;
+    int PROPAVAILr = 224;
+    int PROPAVAILg = 224;
+    int PROPAVAILb = 224;
 
     int PROPSOLDr = 115;
     int PROPSOLDg = 115;
@@ -120,26 +694,50 @@ void DrawGameSpaces(const std::vector<Player> &players) // PropertySoldState)
                       GSb[i]);
     }
 
-    for (const Player &p : players) {
-        int playerID = p.getID();
-        int playerPos = p.getPosition();
-        GamePiece gp = GamePiece(playerID + 1);
-        int x = 0;
-        int y = 0;
-        if (playerID == 0) {
-            x = GSx[playerPos] + 8;
-            y = GSy[playerPos] + 8;
-        } else if (playerID == 1) {
-            x = GSx[playerPos] + 66;
-            y = GSy[playerPos] + 8;
-        } else if (playerID == 2) {
-            x = GSx[playerPos] + 8;
-            y = GSy[playerPos] + 66;
-        } else if (playerID == 3) {
-            x = GSx[playerPos] + 66;
-            y = GSy[playerPos] + 66;
+    for (int i = 0; i < 20; ++i) {
+        DrawRectangle(GSx[i], GSy[i], GSdeltax, GSdeltay, GSr[i], GSg[i],
+                      GSb[i]);
+        if (GSx[i] == 0 && GSy[i] == 0) {
+            DrawStart(0, 0);
         }
-        gp.Draw(x, y);
+        // coins
+        else if (GSx[i] == 125 && GSy[i] == 0) {
+            DrawCoin(125, 0);
+        } else if (GSx[i] == 500 && GSy[i] == 0) {
+            DrawCoin(500, 0);
+        } else if (GSx[i] == 0 && GSy[i] == 500) {
+            DrawCoin(0, 500);
+        } else if (GSx[i] == 500 && GSy[i] == 500) {
+            DrawCoin(500, 500);
+        } else if (GSx[i] == 750 && GSy[i] == 500) {
+            DrawCoin(750, 500);
+        } else if (GSx[i] == 0 && GSy[i] == 125) {
+            DrawBrokenCoin(0, 125);
+        } else if (GSx[i] == 750 && GSy[i] == 125) {
+            DrawBrokenCoin(750, 125);
+        } else if (GSx[i] == 375 && GSy[i] == 500) {
+            DrawBrokenCoin(375, 500);
+        }
+        // property 1
+        else if (GSx[i] == 250 && GSy[i] == 0) {
+            DrawProp_1(250, 0);
+        }
+        // property 2
+        else if (GSx[i] == 750 && GSy[i] == 0) {
+            DrawProp_2(750, 0);
+        }
+        // property 3
+        else if (GSx[i] == 750 && GSy[i] == 375) {
+            DrawProp_3(750, 375);
+        }
+        // property 4
+        else if (GSx[i] == 125 && GSy[i] == 500) {
+            DrawProp_4(125, 500);
+        }
+        // property 5
+        else if (GSx[i] == 0 && GSy[i] == 250) {
+            DrawProp_5(0, 250);
+        }
     }
 
 }
@@ -301,7 +899,8 @@ int main(void) {
         int key = FsInkey();
 
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-        DrawGameSpaces(game.getPlayers());
+        DrawGameSpaces();
+        DrawGamePieces(game.getPlayers());
         DrawPlayerStats(game.getPlayers(), game.getProperties());
         int lb, mb, rb, mx, my;
         auto event = FsGetMouseEvent(lb, mb, rb, mx, my);
