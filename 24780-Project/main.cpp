@@ -891,6 +891,35 @@ int CheckButtonPressed(int mx, int my) // call when left button clicked
     }
 }
 
+void DrawLoseMoney(const int PlayerNum, const int MoneyLost) {
+    char Summary[150];
+    sprintf(Summary, "Player %d lost $%d", PlayerNum, MoneyLost);
+
+    glColor3ub(0, 0, 0);
+    glRasterPos2i(900, 475);
+    YsGlDrawFontBitmap10x14(Summary);
+}
+
+void DrawGainMoney(const int PlayerNum, const int MoneyGained) {
+    char Summary[150];
+    sprintf(Summary, "Player %d gained $%d", PlayerNum, MoneyGained);
+
+    glColor3ub(0, 0, 0);
+    glRasterPos2i(900, 475);
+    YsGlDrawFontBitmap10x14(Summary);
+}
+
+void DrawPayMoney(const int PlayerNumLose, const int PlayerNumGained,
+              const int MoneyPaid) {
+    char Summary[150];
+    sprintf(Summary, "Player %d paid Player %d $%d", PlayerNumLose,
+            PlayerNumGained, MoneyPaid);
+
+    glColor3ub(0, 0, 0);
+    glRasterPos2i(900, 475);
+    YsGlDrawFontBitmap10x14(Summary);
+}
+
 int main(void) {
     FsOpenWindow(16, 16, 1200, 625, 1);
     Game game = Game(4);
@@ -943,11 +972,19 @@ int main(void) {
                 game.setPlayerBalance(currPlayer.getID(),
                                       currPlayer.getBalance() + 100);
                 diceRolled = 0;
+                DrawGainMoney(currPlayer.getID(), 100);
+                FsSwapBuffers();
+                FsSleep(2000);
+                swapToggle = 1;
                 game.nextPlayer();
             } else if (currTile == TileType::LOSE_MONEY) {
                 game.setPlayerBalance(currPlayer.getID(),
                                       currPlayer.getBalance() - 100);
                 diceRolled = 0;
+                DrawLoseMoney(currPlayer.getID(), 100);
+                FsSwapBuffers();
+                FsSleep(2000);
+                swapToggle = 1;
                 game.nextPlayer();
             } else if (currTile == TileType::PROPERTY) {
                 diceRolled = 1;
@@ -994,6 +1031,10 @@ int main(void) {
                             }
                         }
                         diceRolled = 0;
+                        DrawPayMoney(currPlayerID, ownerID, rent);
+                        FsSwapBuffers();
+                        FsSleep(2000);
+                        swapToggle = 1;
                         game.nextPlayer();
                         std::cout << "next\n";
                     } else {
@@ -1003,10 +1044,10 @@ int main(void) {
                 }
             }
         }
-        /*if (swapToggle) {
+        if (swapToggle) {
             swapToggle = 0;
             continue;
-        }*/
+        }
         FsSwapBuffers();
 
         FsSleep(50);
