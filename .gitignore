@@ -3,6 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+Documents/
+
 # Do not sync my solution files
 *.vcxproj
 *.vcxproj.filters

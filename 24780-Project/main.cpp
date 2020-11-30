@@ -835,11 +835,17 @@ void DrawWhoseTurn(int playerID) // check data type to be given
     YsGlDrawFontBitmap10x14(RollMessage);
 }
 
-void DrawBuyButtons() {
+void DrawBuyButtons(int price, std::string name) {
     // call only if player lands on buyable space
+    char BuyMessage[100];
+    sprintf(BuyMessage, "Will you buy %s", name.c_str());
     glColor3ub(0, 0, 0);
-    glRasterPos2i(900, 475);
-    YsGlDrawFontBitmap10x14("Will you buy this property?");
+    glRasterPos2i(900, 450);
+    YsGlDrawFontBitmap10x14(BuyMessage);
+    char BuyMessage2[100];
+    sprintf(BuyMessage2, "for $%d?", price);
+    glRasterPos2i(900, 465);
+    YsGlDrawFontBitmap10x14(BuyMessage2);
 
     int WidB = 88;
     int HeiB = 40;
@@ -950,11 +956,12 @@ int main(void) {
                 int ownerID = currProperty.getOwnerID();
                 int rent = currProperty.getRent();
                 int price = currProperty.getPrice();
+                std::string propertyName = currProperty.getName();
                 int playerPos = currPlayer.getPosition();
                 if (currProperty.getPosition() == playerPos) {
                     if (ownerID == -1 && currPlayer.getBalance() >= price) {
                         // Prompt buying option
-                        DrawBuyButtons();
+                        DrawBuyButtons(price, propertyName);
                         if (event == FSMOUSEEVENT_LBUTTONDOWN) {
                             if (CheckButtonPressed(mx, my) == 1) {
                                 // property sold
@@ -996,10 +1003,10 @@ int main(void) {
                 }
             }
         }
-        if (swapToggle) {
+        /*if (swapToggle) {
             swapToggle = 0;
             continue;
-        }
+        }*/
         FsSwapBuffers();
 
         FsSleep(50);
