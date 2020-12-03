@@ -47,6 +47,30 @@ class Game {
         properties.push_back(Property("Fifth Ave", 100, 50, 15));
         properties.push_back(Property("Forbes Ave", 100, 50, 18));
     }
+    bool checkEndGame() {
+        for (Player& p : players) {
+            if (p.getBalance() <= 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    std::vector<std::string> getWinner() {
+        int max = INT_MIN;
+        std::vector<std::string> getWinner;
+        for (Player& p : players) {
+            if (p.getBalance() > max) {
+                max = p.getBalance();
+            }
+        }
+        for (Player& p : players) {
+            if (p.getBalance() == max) {
+                getWinner.push_back(p.getPlayerName());
+            }
+        }
+        return getWinner;
+    }
+
     int getCurrPlayerID() const { return currPlayerID; }
     Player getCurrPlayer() { return players.at(currPlayerID); }
     Property getProperty(int propertyPos) {

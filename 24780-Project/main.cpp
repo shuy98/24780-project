@@ -1079,6 +1079,12 @@ int main(void) {
     sfxLoseMoney.Initialize("sfx/NOOOO.wav");
 
     while (terminate == 0) {
+        // check if someone is bankrupt
+        if (game.checkEndGame()) {
+            std::vector<std::string> winner;
+            winner = game.getWinner();
+            // TODO: display winners on the panel
+        }
         FsPollDevice();
         int key = FsInkey();
 
