@@ -32,9 +32,7 @@ class Game {
         properties.push_back(Property("Forbes Ave", 100, 50, 18));
     }
     int getCurrPlayerID() const { return currPlayerID; }
-    Player getCurrPlayer() {
-        return players.at(currPlayerID);
-    }
+    Player getCurrPlayer() { return players.at(currPlayerID); }
     Property getProperty(int propertyPos) {
         for (Property &p : properties) {
             if (propertyPos == p.getPosition()) {
@@ -69,7 +67,7 @@ class Game {
         }
     }
     void upgradePropertyRent(int propertyPos) {
-        for (Property& p : properties) {
+        for (Property &p : properties) {
             if (propertyPos == p.getPosition()) {
                 p.upgradeRent();
                 return;

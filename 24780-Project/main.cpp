@@ -1,3 +1,4 @@
+#include "sfx.h"
 #include "fssimplewindow.h"
 #include "ysglfontdata.h"
 #include <iostream>
@@ -6,7 +7,6 @@
 #include "Player.h"
 #include "Dice.hpp"
 #include "GamePiece.hpp"
-#define _CRT_SECURE_NO_WARNINGS
 
 int GSx[20];
 int GSy[20];
@@ -14,17 +14,23 @@ int GSy[20];
 void DrawRect(int x, int y, int size, int color) {
     if (color == 1) {
         glColor3ub(0, 0, 0); // black
-    } else if (color == 2) {
+    }
+    else if (color == 2) {
         glColor3ub(255, 215, 0); // gold
-    } else if (color == 3) {
+    }
+    else if (color == 3) {
         glColor3ub(255, 140, 0);
-    } else if (color == 4) {
+    }
+    else if (color == 4) {
         glColor3ub(255, 165, 0);
-    } else if (color == 5) {
+    }
+    else if (color == 5) {
         glColor3ub(27, 132, 44);
-    } else if (color == 6) {
+    }
+    else if (color == 6) {
         glColor3ub(255, 255, 255);
-    } else {
+    }
+    else {
         glColor3ub(222, 13, 13);
     }
     glBegin(GL_POLYGON);
@@ -38,14 +44,18 @@ void DrawRect(int x, int y, int size, int color) {
 void DrawRect_1(int x, int y, int size, int color) {
     if (color == 1) {
         glColor3ub(0, 0, 0); // black
-    } else if (color == 2) {
+    }
+    else if (color == 2) {
         glColor3ub(153, 255, 255); // tiffany blue
-    } else if (color == 3) {
+    }
+    else if (color == 3) {
         glColor3ub(255, 153, 153); // pink roof
-    } else if (color == 4)         // white window
+    }
+    else if (color == 4)         // white window
     {
         glColor3ub(255, 255, 255);
-    } else // background grey
+    }
+    else // background grey
     {
         glColor3ub(224, 224, 224);
     }
@@ -60,14 +70,18 @@ void DrawRect_1(int x, int y, int size, int color) {
 void DrawRect_2(int x, int y, int size, int color) {
     if (color == 1) {
         glColor3ub(0, 0, 0); // black
-    } else if (color == 2) {
+    }
+    else if (color == 2) {
         glColor3ub(153, 153, 255); // tiffany blue
-    } else if (color == 3) {
+    }
+    else if (color == 3) {
         glColor3ub(255, 0, 0); // pink roof
-    } else if (color == 4)     // white window
+    }
+    else if (color == 4)     // white window
     {
         glColor3ub(102, 178, 255);
-    } else // background grey
+    }
+    else // background grey
     {
         glColor3ub(224, 224, 224);
     }
@@ -83,22 +97,28 @@ void DrawRect_3(int x, int y, int size, int color) {
     if (color == 1) // black 1
     {
         glColor3ub(0, 0, 0); // black
-    } else if (color == 2)   // blue roof @
+    }
+    else if (color == 2)   // blue roof @
     {
         glColor3ub(0, 76, 152);
-    } else if (color == 3) // garage /
+    }
+    else if (color == 3) // garage /
     {
         glColor3ub(153, 76, 0);
-    } else if (color == 4) // side roof .
+    }
+    else if (color == 4) // side roof .
     {
         glColor3ub(51, 153, 255);
-    } else if (color == 5) // background grey $
+    }
+    else if (color == 5) // background grey $
     {
         glColor3ub(224, 224, 224);
-    } else if (color == 6) // windon !
+    }
+    else if (color == 6) // windon !
     {
         glColor3ub(204, 255, 255);
-    } else // ' '
+    }
+    else // ' '
     {
         glColor3ub(255, 102, 102);
     }
@@ -114,16 +134,20 @@ void DrawRect_4(int x, int y, int size, int color) {
     if (color == 1) // black 1
     {
         glColor3ub(0, 0, 0);
-    } else if (color == 2) // pink roof $
+    }
+    else if (color == 2) // pink roof $
     {
         glColor3ub(255, 102, 102);
-    } else if (color == 3) // white window .
+    }
+    else if (color == 3) // white window .
     {
         glColor3ub(255, 255, 255);
-    } else if (color == 4) // background grey @
+    }
+    else if (color == 4) // background grey @
     {
         glColor3ub(224, 224, 224);
-    } else if (color == 5) // door !
+    }
+    else if (color == 5) // door !
     {
         glColor3ub(255, 0, 0);
     }
@@ -144,19 +168,24 @@ void DrawRect_5(int x, int y, int size, int color) {
     if (color == 1) // black 1
     {
         glColor3ub(0, 0, 0);
-    } else if (color == 2) // roof /
+    }
+    else if (color == 2) // roof /
     {
         glColor3ub(102, 51, 0);
-    } else if (color == 3) // white window .
+    }
+    else if (color == 3) // white window .
     {
         glColor3ub(255, 255, 255);
-    } else if (color == 4) // background grey @
+    }
+    else if (color == 4) // background grey @
     {
         glColor3ub(224, 224, 224);
-    } else if (color == 5) // door !
+    }
+    else if (color == 5) // door !
     {
         glColor3ub(255, 0, 0);
-    } else {
+    }
+    else {
         glColor3ub(255, 204, 153);
     }
     glBegin(GL_POLYGON);
@@ -171,13 +200,16 @@ void DrawRect_6(int x, int y, int size, int color) {
     if (color == 1) // black 1
     {
         glColor3ub(0, 0, 0);
-    } else if (color == 2) // roof .
+    }
+    else if (color == 2) // roof .
     {
         glColor3ub(102, 51, 0);
-    } else if (color == 3) // !
+    }
+    else if (color == 3) // !
     {
         glColor3ub(255, 0, 0);
-    } else {
+    }
+    else {
         glColor3ub(255, 215, 56);
     }
     glBegin(GL_POLYGON);
@@ -216,42 +248,56 @@ void DrawCoin(int i, int j) {
 
                 if ('1' == pattern[index]) {
                     DrawRect(a, b, 11, 1);
-                } else if ('.' == pattern[index]) {
+                }
+                else if ('.' == pattern[index]) {
                     DrawRect(a, b, 11, 2);
-                } else if ('/' == pattern[index]) {
+                }
+                else if ('/' == pattern[index]) {
                     DrawRect(a, b, 11, 3);
-                } else if ('@' == pattern[index]) {
+                }
+                else if ('@' == pattern[index]) {
                     DrawRect(a, b, 11, 4);
-                } else {
+                }
+                else {
                     DrawRect(a, b, 11, 5);
                 }
-            } else if (i != 0 && j != 0) {
+            }
+            else if (i != 0 && j != 0) {
                 int a = i + (x * 11);
                 int b = j + (y * 11);
 
                 if ('1' == pattern[index]) {
                     DrawRect(a, b, 11, 1);
-                } else if ('.' == pattern[index]) {
+                }
+                else if ('.' == pattern[index]) {
                     DrawRect(a, b, 11, 2);
-                } else if ('/' == pattern[index]) {
+                }
+                else if ('/' == pattern[index]) {
                     DrawRect(a, b, 11, 3);
-                } else if ('@' == pattern[index]) {
+                }
+                else if ('@' == pattern[index]) {
                     DrawRect(a, b, 11, 4);
-                } else {
+                }
+                else {
                     DrawRect(a, b, 11, 5);
                 }
-            } else {
+            }
+            else {
                 int a = x * 11;
                 int b = j + (y * 11);
                 if ('1' == pattern[index]) {
                     DrawRect(a, b, 11, 1);
-                } else if ('.' == pattern[index]) {
+                }
+                else if ('.' == pattern[index]) {
                     DrawRect(a, b, 11, 2);
-                } else if ('/' == pattern[index]) {
+                }
+                else if ('/' == pattern[index]) {
                     DrawRect(a, b, 11, 3);
-                } else if ('@' == pattern[index]) {
+                }
+                else if ('@' == pattern[index]) {
                     DrawRect(a, b, 11, 4);
-                } else {
+                }
+                else {
                     DrawRect(a, b, 11, 5);
                 }
             }
@@ -289,48 +335,65 @@ void DrawBrokenCoin(int i, int j) {
 
                 if ('1' == pattern[index]) {
                     DrawRect(a, b, 11, 1);
-                } else if ('.' == pattern[index]) {
+                }
+                else if ('.' == pattern[index]) {
                     DrawRect(a, b, 11, 2);
-                } else if ('/' == pattern[index]) {
+                }
+                else if ('/' == pattern[index]) {
                     DrawRect(a, b, 11, 3);
-                } else if ('@' == pattern[index]) {
+                }
+                else if ('@' == pattern[index]) {
                     DrawRect(a, b, 11, 4);
-                } else if ('!' == pattern[index]) {
-                    DrawRect(a, b, 11, 0);
-                } else {
+                }
+                else if ('!' == pattern[index]) {
                     DrawRect(a, b, 11, 0);
                 }
-            } else if (i != 0 && j != 0) {
+                else {
+                    DrawRect(a, b, 11, 0);
+                }
+            }
+            else if (i != 0 && j != 0) {
                 int a = i + (x * 11);
                 int b = j + (y * 11);
 
                 if ('1' == pattern[index]) {
                     DrawRect(a, b, 11, 1);
-                } else if ('.' == pattern[index]) {
+                }
+                else if ('.' == pattern[index]) {
                     DrawRect(a, b, 11, 2);
-                } else if ('/' == pattern[index]) {
+                }
+                else if ('/' == pattern[index]) {
                     DrawRect(a, b, 11, 3);
-                } else if ('@' == pattern[index]) {
+                }
+                else if ('@' == pattern[index]) {
                     DrawRect(a, b, 11, 4);
-                } else if ('!' == pattern[index]) {
-                    DrawRect(a, b, 11, 0);
-                } else {
+                }
+                else if ('!' == pattern[index]) {
                     DrawRect(a, b, 11, 0);
                 }
-            } else {
+                else {
+                    DrawRect(a, b, 11, 0);
+                }
+            }
+            else {
                 int a = x * 11;
                 int b = j + (y * 11);
                 if ('1' == pattern[index]) {
                     DrawRect(a, b, 11, 1);
-                } else if ('.' == pattern[index]) {
+                }
+                else if ('.' == pattern[index]) {
                     DrawRect(a, b, 11, 2);
-                } else if ('/' == pattern[index]) {
+                }
+                else if ('/' == pattern[index]) {
                     DrawRect(a, b, 11, 3);
-                } else if ('@' == pattern[index]) {
+                }
+                else if ('@' == pattern[index]) {
                     DrawRect(a, b, 11, 4);
-                } else if ('!' == pattern[index]) {
+                }
+                else if ('!' == pattern[index]) {
                     DrawRect(a, b, 11, 0);
-                } else {
+                }
+                else {
                     DrawRect(a, b, 11, 0);
                 }
             }
@@ -366,13 +429,17 @@ void DrawProp_1(int i, int j) {
             int b = size * y;
             if ('1' == pattern[index]) {
                 DrawRect_1(a, b, size, 1);
-            } else if ('.' == pattern[index]) {
+            }
+            else if ('.' == pattern[index]) {
                 DrawRect_1(a, b, size, 2);
-            } else if ('/' == pattern[index]) {
+            }
+            else if ('/' == pattern[index]) {
                 DrawRect_1(a, b, size, 4);
-            } else if ('@' == pattern[index]) {
+            }
+            else if ('@' == pattern[index]) {
                 DrawRect_1(a, b, size, 3);
-            } else {
+            }
+            else {
                 DrawRect_1(a, b, size, 0);
             }
         }
@@ -382,7 +449,7 @@ void DrawProp_1(int i, int j) {
 }
 
 void DrawProp_2(int i, int j) {
-    char pattern[] = {"           "
+    char pattern[] = { "           "
                       " 1111111111"
                       " 1        1"
                       " 1 ./  ./ 1"
@@ -403,13 +470,17 @@ void DrawProp_2(int i, int j) {
             int b = size * y;
             if ('1' == pattern[index]) {
                 DrawRect_2(a, b, size, 1);
-            } else if ('.' == pattern[index]) {
+            }
+            else if ('.' == pattern[index]) {
                 DrawRect_2(a, b, size, 2);
-            } else if ('/' == pattern[index]) {
+            }
+            else if ('/' == pattern[index]) {
                 DrawRect_2(a, b, size, 4);
-            } else if ('@' == pattern[index]) {
+            }
+            else if ('@' == pattern[index]) {
                 DrawRect_2(a, b, size, 3);
-            } else {
+            }
+            else {
                 DrawRect_2(a, b, size, 0);
             }
         }
@@ -418,7 +489,7 @@ void DrawProp_2(int i, int j) {
 }
 
 void DrawProp_3(int i, int j) {
-    char pattern[] = {"$@@@111111$"
+    char pattern[] = { "$@@@111111$"
                       "$@.@  ///1$"
                       "$@.@  ///1$"
                       "$@.@  ///1$"
@@ -428,7 +499,7 @@ void DrawProp_3(int i, int j) {
                       "@@@@!! 111$"
                       "$@@@!!   1$"
                       "$$@@     1$"
-                      "$$$@111111$"};
+                      "$$$@111111$" };
     int size = 11;
     for (int x = 0; x < 11; x++) {
         for (int y = 0; y < 11; y++) {
@@ -437,17 +508,23 @@ void DrawProp_3(int i, int j) {
             int b = j + (size * y);
             if ('1' == pattern[index]) {
                 DrawRect_3(a, b, size, 1);
-            } else if ('.' == pattern[index]) {
+            }
+            else if ('.' == pattern[index]) {
                 DrawRect_3(a, b, size, 4);
-            } else if ('/' == pattern[index]) {
+            }
+            else if ('/' == pattern[index]) {
                 DrawRect_3(a, b, size, 3);
-            } else if ('@' == pattern[index]) {
+            }
+            else if ('@' == pattern[index]) {
                 DrawRect_3(a, b, size, 2);
-            } else if ('!' == pattern[index]) {
+            }
+            else if ('!' == pattern[index]) {
                 DrawRect_3(a, b, size, 6);
-            } else if ('$' == pattern[index]) {
+            }
+            else if ('$' == pattern[index]) {
                 DrawRect_3(a, b, size, 5);
-            } else {
+            }
+            else {
                 DrawRect_3(a, b, size, 0);
             }
         }
@@ -456,7 +533,7 @@ void DrawProp_3(int i, int j) {
 }
 
 void DrawProp_4(int i, int j) {
-    char pattern[] = {"@@@@@@@@@@@"
+    char pattern[] = { "@@@@@@@@@@@"
                       "@@@11111111"
                       "@@11 1 1  1"
                       "@1$1 1 1  1"
@@ -466,7 +543,7 @@ void DrawProp_4(int i, int j) {
                       "1$$1 1 1  1"
                       "@1$1 1 1  1"
                       "@@11 1 1  1"
-                      "@@@11111111"};
+                      "@@@11111111" };
     int size = 11;
     for (int x = 0; x < 11; x++) {
         for (int y = 0; y < 11; y++) {
@@ -475,15 +552,20 @@ void DrawProp_4(int i, int j) {
             int b = j + (size * y);
             if ('1' == pattern[index]) {
                 DrawRect_4(a, b, size, 1);
-            } else if ('.' == pattern[index]) {
+            }
+            else if ('.' == pattern[index]) {
                 DrawRect_4(a, b, size, 3);
-            } else if ('@' == pattern[index]) {
+            }
+            else if ('@' == pattern[index]) {
                 DrawRect_4(a, b, size, 4);
-            } else if ('!' == pattern[index]) {
+            }
+            else if ('!' == pattern[index]) {
                 DrawRect_4(a, b, size, 5);
-            } else if ('$' == pattern[index]) {
+            }
+            else if ('$' == pattern[index]) {
                 DrawRect_4(a, b, size, 2);
-            } else {
+            }
+            else {
                 DrawRect_4(a, b, size, 0);
             }
         }
@@ -492,7 +574,7 @@ void DrawProp_4(int i, int j) {
 }
 
 void DrawProp_5(int i, int j) {
-    char pattern[] = {"@@111111111"
+    char pattern[] = { "@@111111111"
                       "@@1//1    1"
                       "111//1... 1"
                       "111//1... 1"
@@ -502,7 +584,7 @@ void DrawProp_5(int i, int j) {
                       "@@1//1... 1"
                       "@@1//1... 1"
                       "@@1//1    1"
-                      "@@111111111"};
+                      "@@111111111" };
     int size = 11;
     for (int x = 0; x < 11; x++) {
         for (int y = 0; y < 11; y++) {
@@ -511,15 +593,20 @@ void DrawProp_5(int i, int j) {
             int b = j + (size * y);
             if ('1' == pattern[index]) {
                 DrawRect_5(a, b, size, 1);
-            } else if ('.' == pattern[index]) {
+            }
+            else if ('.' == pattern[index]) {
                 DrawRect_5(a, b, size, 3);
-            } else if ('@' == pattern[index]) {
+            }
+            else if ('@' == pattern[index]) {
                 DrawRect_5(a, b, size, 4);
-            } else if ('!' == pattern[index]) {
+            }
+            else if ('!' == pattern[index]) {
                 DrawRect_5(a, b, size, 5);
-            } else if ('/' == pattern[index]) {
+            }
+            else if ('/' == pattern[index]) {
                 DrawRect_5(a, b, size, 2);
-            } else {
+            }
+            else {
                 DrawRect_5(a, b, size, 0);
             }
         }
@@ -528,7 +615,7 @@ void DrawProp_5(int i, int j) {
 }
 
 void DrawStart(int i, int j) {
-    char pattern[] = {"           "
+    char pattern[] = { "           "
                       "   !       "
                       "  !!       "
                       " !!!  111  "
@@ -538,7 +625,7 @@ void DrawStart(int i, int j) {
                       "      111  "
                       "      111  "
                       "           "
-                      "           "};
+                      "           " };
     int size = 11;
     for (int x = 0; x < 11; x++) {
         for (int y = 0; y < 11; y++) {
@@ -547,11 +634,14 @@ void DrawStart(int i, int j) {
             int b = j + (size * y);
             if ('1' == pattern[index]) {
                 DrawRect_6(a, b, size, 1);
-            } else if ('.' == pattern[index]) {
+            }
+            else if ('.' == pattern[index]) {
                 DrawRect_6(a, b, size, 2);
-            } else if ('!' == pattern[index]) {
+            }
+            else if ('!' == pattern[index]) {
                 DrawRect_6(a, b, size, 3);
-            } else {
+            }
+            else {
                 DrawRect_6(a, b, size, 0);
             }
         }
@@ -560,7 +650,7 @@ void DrawStart(int i, int j) {
 }
 
 void DrawRectangle(int x, int y, int dx, int dy, int r, int g,
-                   int b) // x and y given by top left corner
+    int b) // x and y given by top left corner
 {
     glColor3ub(r, g, b);
 
@@ -572,8 +662,8 @@ void DrawRectangle(int x, int y, int dx, int dy, int r, int g,
     glEnd();
 }
 
-void DrawGamePieces(const std::vector<Player>& players, Game &game, int *done) {
-    for (const Player &p : players) {
+void DrawGamePieces(const std::vector<Player>& players, Game& game, int* done) {
+    for (const Player& p : players) {
         int playerID = p.getID();
         int playerPos = p.getPosition();
         int totalSteps = p.getTotalSteps();
@@ -594,13 +684,16 @@ void DrawGamePieces(const std::vector<Player>& players, Game &game, int *done) {
         if (playerID == 0) {
             x = GSx[playerPos] + 8;
             y = GSy[playerPos] + 8;
-        } else if (playerID == 1) {
+        }
+        else if (playerID == 1) {
             x = GSx[playerPos] + 66;
             y = GSy[playerPos] + 8;
-        } else if (playerID == 2) {
+        }
+        else if (playerID == 2) {
             x = GSx[playerPos] + 8;
             y = GSy[playerPos] + 66;
-        } else if (playerID == 3) {
+        }
+        else if (playerID == 3) {
             x = GSx[playerPos] + 66;
             y = GSy[playerPos] + 66;
         }
@@ -680,23 +773,23 @@ void DrawGameSpaces() // PropertySoldState)
 
     // need state of properties to appropriately determine color
 
-    int GSr[20] = {STARTr,     PLUSMONEYr,  PROPAVAILr, BLANKr,
+    int GSr[20] = { STARTr,     PLUSMONEYr,  PROPAVAILr, BLANKr,
                    PLUSMONEYr, BLANKr,      PROPAVAILr, MINUSMONEYr,
                    BLANKr,     PROPAVAILr,  PLUSMONEYr, BLANKr,
                    PLUSMONEYr, MINUSMONEYr, BLANKr,     PROPAVAILr,
-                   PLUSMONEYr, BLANKr,      PROPAVAILr, MINUSMONEYr};
+                   PLUSMONEYr, BLANKr,      PROPAVAILr, MINUSMONEYr };
 
-    int GSg[20] = {STARTg,     PLUSMONEYg,  PROPAVAILg, BLANKg,
+    int GSg[20] = { STARTg,     PLUSMONEYg,  PROPAVAILg, BLANKg,
                    PLUSMONEYg, BLANKg,      PROPAVAILg, MINUSMONEYg,
                    BLANKg,     PROPAVAILg,  PLUSMONEYg, BLANKg,
                    PLUSMONEYg, MINUSMONEYg, BLANKg,     PROPAVAILg,
-                   PLUSMONEYg, BLANKg,      PROPAVAILg, MINUSMONEYg};
+                   PLUSMONEYg, BLANKg,      PROPAVAILg, MINUSMONEYg };
 
-    int GSb[20] = {STARTb,     PLUSMONEYb,  PROPAVAILb, BLANKb,
+    int GSb[20] = { STARTb,     PLUSMONEYb,  PROPAVAILb, BLANKb,
                    PLUSMONEYb, BLANKb,      PROPAVAILb, MINUSMONEYb,
                    BLANKb,     PROPAVAILb,  PLUSMONEYb, BLANKb,
                    PLUSMONEYb, MINUSMONEYb, BLANKb,     PROPAVAILb,
-                   PLUSMONEYb, BLANKb,      PROPAVAILb, MINUSMONEYb};
+                   PLUSMONEYb, BLANKb,      PROPAVAILb, MINUSMONEYb };
 
     // if (Property 1 owned)//repeat for each property
     //{
@@ -707,31 +800,38 @@ void DrawGameSpaces() // PropertySoldState)
 
     for (int i = 0; i < 20; ++i) {
         DrawRectangle(GSx[i], GSy[i], GSdeltax, GSdeltay, GSr[i], GSg[i],
-                      GSb[i]);
+            GSb[i]);
     }
 
     for (int i = 0; i < 20; ++i) {
         DrawRectangle(GSx[i], GSy[i], GSdeltax, GSdeltay, GSr[i], GSg[i],
-                      GSb[i]);
+            GSb[i]);
         if (GSx[i] == 0 && GSy[i] == 0) {
             DrawStart(0, 0);
         }
         // coins
         else if (GSx[i] == 125 && GSy[i] == 0) {
             DrawCoin(125, 0);
-        } else if (GSx[i] == 500 && GSy[i] == 0) {
+        }
+        else if (GSx[i] == 500 && GSy[i] == 0) {
             DrawCoin(500, 0);
-        } else if (GSx[i] == 0 && GSy[i] == 500) {
+        }
+        else if (GSx[i] == 0 && GSy[i] == 500) {
             DrawCoin(0, 500);
-        } else if (GSx[i] == 500 && GSy[i] == 500) {
+        }
+        else if (GSx[i] == 500 && GSy[i] == 500) {
             DrawCoin(500, 500);
-        } else if (GSx[i] == 750 && GSy[i] == 500) {
+        }
+        else if (GSx[i] == 750 && GSy[i] == 500) {
             DrawCoin(750, 500);
-        } else if (GSx[i] == 0 && GSy[i] == 125) {
+        }
+        else if (GSx[i] == 0 && GSy[i] == 125) {
             DrawBrokenCoin(0, 125);
-        } else if (GSx[i] == 750 && GSy[i] == 125) {
+        }
+        else if (GSx[i] == 750 && GSy[i] == 125) {
             DrawBrokenCoin(750, 125);
-        } else if (GSx[i] == 375 && GSy[i] == 500) {
+        }
+        else if (GSx[i] == 375 && GSy[i] == 500) {
             DrawBrokenCoin(375, 500);
         }
         // property 1
@@ -758,8 +858,8 @@ void DrawGameSpaces() // PropertySoldState)
 
 }
 
-void DrawPlayerStats(const std::vector<Player> &players,
-                     const std::vector<Property> &properties) {
+void DrawPlayerStats(const std::vector<Player>& players,
+    const std::vector<Property>& properties) {
     int x = 150;
     int y = 150;
     int spacing = 150;
@@ -833,7 +933,7 @@ void DrawWhoseTurn(int playerID) // check data type to be given
     // call only if it is time for next player to roll
     char RollMessage[100];
     sprintf(RollMessage, "Player %d, please roll.",
-            playerID + 1); // tie to player class info
+        playerID + 1); // tie to player class info
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 300);
     YsGlDrawFontBitmap10x14(RollMessage);
@@ -914,14 +1014,19 @@ void DrawGainMoney(const int PlayerNum, const int MoneyGained) {
 }
 
 void DrawPayMoney(const int PlayerNumLose, const int PlayerNumGained,
-              const int MoneyPaid) {
+    const int MoneyPaid) {
     char Summary[150];
     sprintf(Summary, "Player %d paid Player %d $%d", PlayerNumLose + 1,
-            PlayerNumGained + 1, MoneyPaid);
+        PlayerNumGained + 1, MoneyPaid);
 
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 475);
     YsGlDrawFontBitmap10x14(Summary);
+}
+
+void InitializeSFX()
+{
+
 }
 
 int main(void) {
@@ -933,6 +1038,17 @@ int main(void) {
     int playerMoveAnimDone = 0;
     Dice dice;
     dice.SetLocation(900, 0);
+
+    // BGM and SFX objects
+    sfx sfxBGM;
+    sfxBGM.Initialize("sfx/Netherplace_Looping_quiet.wav");
+    sfxBGM.playRepeat();
+    sfx sfxClick;
+    sfxClick.Initialize("sfx/sfx_sounds_button11.wav");
+    sfx sfxEarnMoney;
+    sfxEarnMoney.Initialize("sfx/sfx_coin_cluster5.wav");
+    sfx sfxLoseMoney;
+    sfxLoseMoney.Initialize("sfx/NOOOO.wav");
 
     while (terminate == 0) {
         FsPollDevice();
@@ -966,7 +1082,8 @@ int main(void) {
             default:
                 break;
             }
-        } else {
+        }
+        else {
             // Player moved
             TileType currTile = game.getTileType(currPlayer.getPosition());
             if (currTile == TileType::EMPTY || currTile == TileType::START) {
@@ -976,10 +1093,12 @@ int main(void) {
                     game.nextPlayer();
                     playerMoveAnimDone = 0;
                 }
-            } else if (currTile == TileType::EARN_MONEY) {
+            }
+            else if (currTile == TileType::EARN_MONEY) {
                 if (playerMoveAnimDone) {
+                    sfxEarnMoney.playOnce();
                     game.setPlayerBalance(currPlayer.getID(),
-                                      currPlayer.getBalance() + 100);
+                        currPlayer.getBalance() + 100);
                     diceRolled = 0;
                     DrawGainMoney(currPlayer.getID(), 100);
                     FsSwapBuffers();
@@ -988,10 +1107,12 @@ int main(void) {
                     game.nextPlayer();
                     playerMoveAnimDone = 0;
                 }
-            } else if (currTile == TileType::LOSE_MONEY) {
+            }
+            else if (currTile == TileType::LOSE_MONEY) {
                 if (playerMoveAnimDone) {
+                    sfxLoseMoney.playOnce();
                     game.setPlayerBalance(currPlayer.getID(),
-                                          currPlayer.getBalance() - 100);
+                        currPlayer.getBalance() - 100);
                     diceRolled = 0;
                     DrawLoseMoney(currPlayer.getID(), 100);
                     FsSwapBuffers();
@@ -1000,7 +1121,8 @@ int main(void) {
                     game.nextPlayer();
                     playerMoveAnimDone = 0;
                 }
-            } else if (currTile == TileType::PROPERTY) {
+            }
+            else if (currTile == TileType::PROPERTY) {
                 diceRolled = 1;
                 Property currProperty =
                     game.getProperty(currPlayer.getPosition());
@@ -1016,18 +1138,21 @@ int main(void) {
                         if (event == FSMOUSEEVENT_LBUTTONDOWN) {
                             if (CheckButtonPressed(mx, my) == 1) {
                                 // property sold
+                                sfxClick.playOnce();
                                 if (playerMoveAnimDone) {
                                     game.setPlayerBalance(
                                         currPlayerID,
                                         currPlayer.getBalance() - price);
                                     game.setPropertyOwner(playerPos,
-                                                          currPlayerID);
+                                        currPlayerID);
                                     diceRolled = 0;
                                     game.nextPlayer();
                                     playerMoveAnimDone = 0;
                                 }
-                            } else if (CheckButtonPressed(mx, my) == 2) {
+                            }
+                            else if (CheckButtonPressed(mx, my) == 2) {
                                 // property not sold
+                                sfxClick.playOnce();
                                 if (playerMoveAnimDone) {
                                     diceRolled = 0;
                                     game.nextPlayer();
@@ -1035,18 +1160,20 @@ int main(void) {
                                 }
                             }
                         }
-                    } else if (ownerID != -1 && ownerID != currPlayerID) {
+                    }
+                    else if (ownerID != -1 && ownerID != currPlayerID) {
                         // pay rent
                         if (playerMoveAnimDone) {
+                            sfxLoseMoney.playOnce();
                             std::cout << "Player " << currPlayerID
-                                      << " pays rent" << std::endl;
+                                << " pays rent" << std::endl;
                             game.setPlayerBalance(
                                 currPlayerID, currPlayer.getBalance() - rent);
                             std::vector<Player> players = game.getPlayers();
-                            for (Player &p : players) {
+                            for (Player& p : players) {
                                 if (p.getID() == ownerID) {
                                     std::cout << "ownerID: " << ownerID
-                                              << std::endl;
+                                        << std::endl;
                                     game.setPlayerBalance(
                                         ownerID, p.getBalance() + rent);
                                     break;
@@ -1060,8 +1187,8 @@ int main(void) {
                             game.nextPlayer();
                             playerMoveAnimDone = 0;
                         }
-                    } else if (ownerID != -1 && ownerID == currPlayerID) {
-                        // On my own property
+                    } 
+                    else if (ownerID != -1 && ownerID == currPlayerID) {
                         if (playerMoveAnimDone) {
                             game.upgradePropertyRent(playerPos);
                             diceRolled = 0;
@@ -1087,5 +1214,10 @@ int main(void) {
         FsSleep(100);
     }
 
+    // close sound effect players
+    sfxBGM.close();
+    sfxClick.close();
+    sfxEarnMoney.close();
+    sfxLoseMoney.close();
     return 0;
 }
