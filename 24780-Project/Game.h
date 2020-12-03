@@ -68,6 +68,15 @@ class Game {
             }
         }
     }
+    void setLastLocation(int playerID, int pos, int steps) {
+        for (Player &p : players) {
+            if (currPlayerID == p.getID()) {
+                p.setLastPosition(pos);
+                p.setLastTotalSteps(steps);
+                return;
+            }
+        }
+    }
     void movePlayer(int playerID, int steps) {
         for (Player &p : players) {
             if (currPlayerID == p.getID()) {

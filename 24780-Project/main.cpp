@@ -186,6 +186,7 @@ void DrawRect_6(int x, int y, int size, int color) {
     glVertex2i(x, y + size);
     glEnd();
 }
+
 void DrawCoin(int i, int j) {
     unsigned char pattern[] = {
 
@@ -570,10 +571,22 @@ void DrawRectangle(int x, int y, int dx, int dy, int r, int g,
     glEnd();
 }
 
-void DrawGamePieces(const std::vector<Player>& players) {
+void DrawGamePieces(const std::vector<Player>& players, Game &game, int *done) {
     for (const Player &p : players) {
         int playerID = p.getID();
         int playerPos = p.getPosition();
+        int totalSteps = p.getTotalSteps();
+        int lastPlayerPos = p.getLastPosition();
+        int lastTotalSteps = p.getLastTotalSteps();
+        if (lastTotalSteps < totalSteps) {
+            lastPlayerPos = (lastPlayerPos + 1) % 20;
+            lastTotalSteps++;
+            game.setLastLocation(playerID, lastPlayerPos, lastTotalSteps);
+            playerPos = lastPlayerPos;
+            if (lastTotalSteps >= totalSteps) {
+                *done = 1;
+            }
+        }
         GamePiece gp = GamePiece(playerID + 1);
         int x = 0;
         int y = 0;
@@ -593,6 +606,8 @@ void DrawGamePieces(const std::vector<Player>& players) {
         gp.Draw(x, y);
     }
 }
+
+
 
 void DrawGameSpaces() // PropertySoldState)
 {
@@ -760,7 +775,7 @@ void DrawPlayerStats(const std::vector<Player> &players,
 
         // Write Player#
         char PlayerNum[100];
-        sprintf(PlayerNum, "Player %d", currPlayer.getID());
+        sprintf(PlayerNum, "Player %d", currPlayer.getID() + 1);
         glColor3ub(255, 255, 255);
         glRasterPos2i(x + 5, y + 15);
         YsGlDrawFontBitmap10x14(PlayerNum);
@@ -808,18 +823,6 @@ void DrawPlayerStats(const std::vector<Player> &players,
             YsGlDrawFontBitmap10x14(properties.at(4).getName().c_str());
         }
 
-        // Write rank
-
-        char Rank[100];
-        int Ranking = 0;
-        sprintf(Rank, "Rank: %d", Ranking); // tie to player class info
-        glColor3ub(255, 255, 255);
-        glRasterPos2i(x + 5, y + 175);
-        YsGlDrawFontBitmap10x14(Rank);
-
-        // Display game piece
-        {}
-
         x += spacing;
     }
 }
@@ -829,7 +832,7 @@ void DrawWhoseTurn(int playerID) // check data type to be given
     // call only if it is time for next player to roll
     char RollMessage[100];
     sprintf(RollMessage, "Player %d, please roll.",
-            playerID); // tie to player class info
+            playerID + 1); // tie to player class info
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 300);
     YsGlDrawFontBitmap10x14(RollMessage);
@@ -893,7 +896,7 @@ int CheckButtonPressed(int mx, int my) // call when left button clicked
 
 void DrawLoseMoney(const int PlayerNum, const int MoneyLost) {
     char Summary[150];
-    sprintf(Summary, "Player %d lost $%d", PlayerNum, MoneyLost);
+    sprintf(Summary, "Player %d lost $%d", PlayerNum + 1, MoneyLost);
 
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 475);
@@ -902,7 +905,7 @@ void DrawLoseMoney(const int PlayerNum, const int MoneyLost) {
 
 void DrawGainMoney(const int PlayerNum, const int MoneyGained) {
     char Summary[150];
-    sprintf(Summary, "Player %d gained $%d", PlayerNum, MoneyGained);
+    sprintf(Summary, "Player %d gained $%d", PlayerNum + 1, MoneyGained);
 
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 475);
@@ -912,8 +915,8 @@ void DrawGainMoney(const int PlayerNum, const int MoneyGained) {
 void DrawPayMoney(const int PlayerNumLose, const int PlayerNumGained,
               const int MoneyPaid) {
     char Summary[150];
-    sprintf(Summary, "Player %d paid Player %d $%d", PlayerNumLose,
-            PlayerNumGained, MoneyPaid);
+    sprintf(Summary, "Player %d paid Player %d $%d", PlayerNumLose + 1,
+            PlayerNumGained + 1, MoneyPaid);
 
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 475);
@@ -926,6 +929,7 @@ int main(void) {
     int diceRolled = 0;
     int terminate = 0;
     int swapToggle = 0;
+    int playerMoveAnimDone = 0;
     Dice dice;
     dice.SetLocation(900, 0);
 
@@ -935,7 +939,7 @@ int main(void) {
 
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         DrawGameSpaces();
-        DrawGamePieces(game.getPlayers());
+        DrawGamePieces(game.getPlayers(), game, &playerMoveAnimDone);
         DrawPlayerStats(game.getPlayers(), game.getProperties());
         int lb, mb, rb, mx, my;
         auto event = FsGetMouseEvent(lb, mb, rb, mx, my);
@@ -966,26 +970,35 @@ int main(void) {
             TileType currTile = game.getTileType(currPlayer.getPosition());
             if (currTile == TileType::EMPTY || currTile == TileType::START) {
                 // Nothing, next player
-                diceRolled = 0;
-                game.nextPlayer();
+                if (playerMoveAnimDone) {
+                    diceRolled = 0;
+                    game.nextPlayer();
+                    playerMoveAnimDone = 0;
+                }
             } else if (currTile == TileType::EARN_MONEY) {
-                game.setPlayerBalance(currPlayer.getID(),
+                if (playerMoveAnimDone) {
+                    game.setPlayerBalance(currPlayer.getID(),
                                       currPlayer.getBalance() + 100);
-                diceRolled = 0;
-                DrawGainMoney(currPlayer.getID(), 100);
-                FsSwapBuffers();
-                FsSleep(2000);
-                swapToggle = 1;
-                game.nextPlayer();
+                    diceRolled = 0;
+                    DrawGainMoney(currPlayer.getID(), 100);
+                    FsSwapBuffers();
+                    FsSleep(2000);
+                    swapToggle = 1;
+                    game.nextPlayer();
+                    playerMoveAnimDone = 0;
+                }
             } else if (currTile == TileType::LOSE_MONEY) {
-                game.setPlayerBalance(currPlayer.getID(),
-                                      currPlayer.getBalance() - 100);
-                diceRolled = 0;
-                DrawLoseMoney(currPlayer.getID(), 100);
-                FsSwapBuffers();
-                FsSleep(2000);
-                swapToggle = 1;
-                game.nextPlayer();
+                if (playerMoveAnimDone) {
+                    game.setPlayerBalance(currPlayer.getID(),
+                                          currPlayer.getBalance() - 100);
+                    diceRolled = 0;
+                    DrawLoseMoney(currPlayer.getID(), 100);
+                    FsSwapBuffers();
+                    FsSleep(2000);
+                    swapToggle = 1;
+                    game.nextPlayer();
+                    playerMoveAnimDone = 0;
+                }
             } else if (currTile == TileType::PROPERTY) {
                 diceRolled = 1;
                 Property currProperty =
@@ -1002,44 +1015,56 @@ int main(void) {
                         if (event == FSMOUSEEVENT_LBUTTONDOWN) {
                             if (CheckButtonPressed(mx, my) == 1) {
                                 // property sold
-                                game.setPlayerBalance(currPlayerID,
-                                                      currPlayer.getBalance() -
-                                                          price);
-                                game.setPropertyOwner(playerPos, currPlayerID);
-                                diceRolled = 0;
-                                game.nextPlayer();
+                                if (playerMoveAnimDone) {
+                                    game.setPlayerBalance(
+                                        currPlayerID,
+                                        currPlayer.getBalance() - price);
+                                    game.setPropertyOwner(playerPos,
+                                                          currPlayerID);
+                                    diceRolled = 0;
+                                    game.nextPlayer();
+                                    playerMoveAnimDone = 0;
+                                }
                             } else if (CheckButtonPressed(mx, my) == 2) {
                                 // property not sold
-                                diceRolled = 0;
-                                game.nextPlayer();
+                                if (playerMoveAnimDone) {
+                                    diceRolled = 0;
+                                    game.nextPlayer();
+                                    playerMoveAnimDone = 0;
+                                }
                             }
                         }
                     } else if (ownerID != -1 && ownerID != currPlayerID) {
                         // pay rent
-                        std::cout << "Player " << currPlayerID << " pays rent"
-                                  << std::endl;
-                        game.setPlayerBalance(currPlayerID,
-                                              currPlayer.getBalance() - rent);
-                        std::vector<Player> players = game.getPlayers();
-                        for (Player &p : players) {
-                            if (p.getID() == ownerID) {
-                                std::cout << "ownerID: " << ownerID
-                                          << std::endl;
-                                game.setPlayerBalance(ownerID,
-                                                      p.getBalance() + rent);
-                                break;
+                        if (playerMoveAnimDone) {
+                            std::cout << "Player " << currPlayerID
+                                      << " pays rent" << std::endl;
+                            game.setPlayerBalance(
+                                currPlayerID, currPlayer.getBalance() - rent);
+                            std::vector<Player> players = game.getPlayers();
+                            for (Player &p : players) {
+                                if (p.getID() == ownerID) {
+                                    std::cout << "ownerID: " << ownerID
+                                              << std::endl;
+                                    game.setPlayerBalance(
+                                        ownerID, p.getBalance() + rent);
+                                    break;
+                                }
                             }
+                            diceRolled = 0;
+                            DrawPayMoney(currPlayerID, ownerID, rent);
+                            FsSwapBuffers();
+                            FsSleep(2000);
+                            swapToggle = 1;
+                            game.nextPlayer();
+                            playerMoveAnimDone = 0;
                         }
-                        diceRolled = 0;
-                        DrawPayMoney(currPlayerID, ownerID, rent);
-                        FsSwapBuffers();
-                        FsSleep(2000);
-                        swapToggle = 1;
-                        game.nextPlayer();
-                        std::cout << "next\n";
                     } else {
-                        diceRolled = 0;
-                        game.nextPlayer();
+                        if (playerMoveAnimDone) {
+                            diceRolled = 0;
+                            game.nextPlayer();
+                            playerMoveAnimDone = 0;
+                        }
                     }
                 }
             }
@@ -1050,7 +1075,7 @@ int main(void) {
         }
         FsSwapBuffers();
 
-        FsSleep(50);
+        FsSleep(100);
     }
 
     return 0;
