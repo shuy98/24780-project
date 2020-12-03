@@ -775,19 +775,19 @@ void DrawGameSpaces() // PropertySoldState)
 
     int GSr[20] = { STARTr,     PLUSMONEYr,  PROPAVAILr, BLANKr,
                    PLUSMONEYr, BLANKr,      PROPAVAILr, MINUSMONEYr,
-                   BLANKr,     PROPAVAILr,  PLUSMONEYr, BLANKr,
+                   BLANKr,     PROPAVAILr,  MINUSMONEYr, BLANKr,
                    PLUSMONEYr, MINUSMONEYr, BLANKr,     PROPAVAILr,
                    PLUSMONEYr, BLANKr,      PROPAVAILr, MINUSMONEYr };
 
     int GSg[20] = { STARTg,     PLUSMONEYg,  PROPAVAILg, BLANKg,
                    PLUSMONEYg, BLANKg,      PROPAVAILg, MINUSMONEYg,
-                   BLANKg,     PROPAVAILg,  PLUSMONEYg, BLANKg,
+                   BLANKg,     PROPAVAILg,  MINUSMONEYg, BLANKg,
                    PLUSMONEYg, MINUSMONEYg, BLANKg,     PROPAVAILg,
                    PLUSMONEYg, BLANKg,      PROPAVAILg, MINUSMONEYg };
 
     int GSb[20] = { STARTb,     PLUSMONEYb,  PROPAVAILb, BLANKb,
                    PLUSMONEYb, BLANKb,      PROPAVAILb, MINUSMONEYb,
-                   BLANKb,     PROPAVAILb,  PLUSMONEYb, BLANKb,
+                   BLANKb,     PROPAVAILb,  MINUSMONEYb, BLANKb,
                    PLUSMONEYb, MINUSMONEYb, BLANKb,     PROPAVAILb,
                    PLUSMONEYb, BLANKb,      PROPAVAILb, MINUSMONEYb };
 
@@ -823,7 +823,7 @@ void DrawGameSpaces() // PropertySoldState)
             DrawCoin(500, 500);
         }
         else if (GSx[i] == 750 && GSy[i] == 500) {
-            DrawCoin(750, 500);
+            DrawBrokenCoin(750, 500);
         }
         else if (GSx[i] == 0 && GSy[i] == 125) {
             DrawBrokenCoin(0, 125);
@@ -876,7 +876,7 @@ void DrawPlayerStats(const std::vector<Player>& players,
 
         // Write Player#
         char PlayerNum[100];
-        sprintf(PlayerNum, "Player %d", currPlayer.getID() + 1);
+        sprintf(PlayerNum, "%s", currPlayer.getPlayerName().c_str());
         glColor3ub(255, 255, 255);
         glRasterPos2i(x + 5, y + 15);
         YsGlDrawFontBitmap10x14(PlayerNum);
@@ -928,12 +928,19 @@ void DrawPlayerStats(const std::vector<Player>& players,
     }
 }
 
-void DrawWhoseTurn(int playerID) // check data type to be given
+void DrawWhoseTurn(const std::vector<Player> &players,
+                   int playerID) // check data type to be given
 {
     // call only if it is time for next player to roll
+    
     char RollMessage[100];
-    sprintf(RollMessage, "Player %d, please roll.",
-        playerID + 1); // tie to player class info
+    for (int i = 0; i < 4; ++i) {
+        Player currPlayer = players.at(i);
+        if (i == playerID) {
+            sprintf(RollMessage, "%s, please roll.", 
+                currPlayer.getPlayerName().c_str());
+        }
+    }
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 300);
     YsGlDrawFontBitmap10x14(RollMessage);
@@ -995,30 +1002,51 @@ int CheckButtonPressed(int mx, int my) // call when left button clicked
     }
 }
 
-void DrawLoseMoney(const int PlayerNum, const int MoneyLost) {
+void DrawLoseMoney(const std::vector<Player> &players, const int playerID,
+                   const int MoneyLost) {
     char Summary[150];
-    sprintf(Summary, "Player %d lost $%d", PlayerNum + 1, MoneyLost);
-
+    for (int i = 0; i < 4; ++i) {
+        Player currPlayer = players.at(i);
+        if (i == playerID) {
+            sprintf(Summary, "%s lost $%d.",
+                    currPlayer.getPlayerName().c_str(), MoneyLost);
+        }
+    }
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 475);
     YsGlDrawFontBitmap10x14(Summary);
 }
 
-void DrawGainMoney(const int PlayerNum, const int MoneyGained) {
+void DrawGainMoney(const std::vector<Player> &players, const int playerID,
+                   const int MoneyGained) {
     char Summary[150];
-    sprintf(Summary, "Player %d gained $%d", PlayerNum + 1, MoneyGained);
-
+    for (int i = 0; i < 4; ++i) {
+        Player currPlayer = players.at(i);
+        if (i == playerID) {
+            sprintf(Summary, "%s gained $%d.", currPlayer.getPlayerName().c_str(),
+                    MoneyGained);
+        }
+    }
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 475);
     YsGlDrawFontBitmap10x14(Summary);
 }
 
-void DrawPayMoney(const int PlayerNumLose, const int PlayerNumGained,
-    const int MoneyPaid) {
+void DrawPayMoney(const std::vector<Player> &players, const int PlayerNumLose,
+                  const int PlayerNumGained, const int MoneyPaid) {
     char Summary[150];
-    sprintf(Summary, "Player %d paid Player %d $%d", PlayerNumLose + 1,
-        PlayerNumGained + 1, MoneyPaid);
-
+    Player payer, owner;
+    for (int i = 0; i < 4; ++i) {
+        Player currPlayer = players.at(i);
+        if (i == PlayerNumLose) {
+            payer = currPlayer;
+        }
+        if (i == PlayerNumGained) {
+            owner = currPlayer;
+        }
+    }
+    sprintf(Summary, "%s paid %s $%d", payer.getPlayerName().c_str(),
+        owner.getPlayerName().c_str(), MoneyPaid);
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 475);
     YsGlDrawFontBitmap10x14(Summary);
@@ -1065,7 +1093,7 @@ int main(void) {
 
         if (!diceRolled) {
             // wait for player action
-            DrawWhoseTurn(currPlayer.getID());
+            DrawWhoseTurn(game.getPlayers(), currPlayer.getID());
             dice.DrawNext();
 
             switch (key) {
@@ -1100,7 +1128,7 @@ int main(void) {
                     game.setPlayerBalance(currPlayer.getID(),
                         currPlayer.getBalance() + 100);
                     diceRolled = 0;
-                    DrawGainMoney(currPlayer.getID(), 100);
+                    DrawGainMoney(game.getPlayers(), currPlayer.getID(), 100);
                     FsSwapBuffers();
                     FsSleep(2000);
                     swapToggle = 1;
@@ -1114,7 +1142,7 @@ int main(void) {
                     game.setPlayerBalance(currPlayer.getID(),
                         currPlayer.getBalance() - 100);
                     diceRolled = 0;
-                    DrawLoseMoney(currPlayer.getID(), 100);
+                    DrawLoseMoney(game.getPlayers(), currPlayer.getID(), 100);
                     FsSwapBuffers();
                     FsSleep(2000);
                     swapToggle = 1;
@@ -1180,7 +1208,8 @@ int main(void) {
                                 }
                             }
                             diceRolled = 0;
-                            DrawPayMoney(currPlayerID, ownerID, rent);
+                            DrawPayMoney(game.getPlayers(), currPlayerID, 
+                                ownerID, rent);
                             FsSwapBuffers();
                             FsSleep(2000);
                             swapToggle = 1;

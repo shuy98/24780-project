@@ -24,6 +24,22 @@ class Game {
         playerNum = playerNumbers;
         for (int i = 0; i < playerNum; i++) {
             players.push_back(Player(i, DEFAULT_BALANCE));
+            switch (i) {
+            case 0:
+                players.at(i).setPlayerName("Panda");
+                break;
+            case 1:
+                players.at(i).setPlayerName("Rabbit");
+                break;
+            case 2:
+                players.at(i).setPlayerName("Squirrel");
+                break;
+            case 3:
+                players.at(i).setPlayerName("Monkey");
+                break;
+            default:
+                break;
+            }
         }
         properties.push_back(Property("Company", 100, 50, 2));
         properties.push_back(Property("Water Works", 100, 50, 6));
@@ -99,7 +115,6 @@ class Game {
             break;
         case 1:
         case 4:
-        case 10:
         case 12:
         case 16:
             result = TileType::EARN_MONEY;
@@ -120,6 +135,7 @@ class Game {
             result = TileType::EMPTY;
             break;
         case 7:
+        case 10:
         case 13:
         case 19:
             result = TileType::LOSE_MONEY;
