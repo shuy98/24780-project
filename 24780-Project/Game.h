@@ -25,11 +25,11 @@ class Game {
         for (int i = 0; i < playerNum; i++) {
             players.push_back(Player(i, DEFAULT_BALANCE));
         }
-        properties.push_back(Property("Company", 100, 100, 2));
-        properties.push_back(Property("Water Works", 100, 100, 6));
-        properties.push_back(Property("Park Place", 100, 100, 9));
-        properties.push_back(Property("Fifth Ave", 100, 100, 15));
-        properties.push_back(Property("Forbes Ave", 100, 100, 18));
+        properties.push_back(Property("Company", 100, 50, 2));
+        properties.push_back(Property("Water Works", 100, 50, 6));
+        properties.push_back(Property("Park Place", 100, 50, 9));
+        properties.push_back(Property("Fifth Ave", 100, 50, 15));
+        properties.push_back(Property("Forbes Ave", 100, 50, 18));
     }
     int getCurrPlayerID() const { return currPlayerID; }
     Player getCurrPlayer() {
@@ -64,6 +64,14 @@ class Game {
         for (Property &p : properties) {
             if (propertyPos == p.getPosition()) {
                 p.setOwnerID(ownerID);
+                return;
+            }
+        }
+    }
+    void upgradePropertyRent(int propertyPos) {
+        for (Property& p : properties) {
+            if (propertyPos == p.getPosition()) {
+                p.upgradeRent();
                 return;
             }
         }

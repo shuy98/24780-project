@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Dice.hpp"
 #include "GamePiece.hpp"
+#define _CRT_SECURE_NO_WARNINGS
 
 int GSx[20];
 int GSy[20];
@@ -1056,6 +1057,14 @@ int main(void) {
                             FsSwapBuffers();
                             FsSleep(2000);
                             swapToggle = 1;
+                            game.nextPlayer();
+                            playerMoveAnimDone = 0;
+                        }
+                    } else if (ownerID != -1 && ownerID == currPlayerID) {
+                        // On my own property
+                        if (playerMoveAnimDone) {
+                            game.upgradePropertyRent(playerPos);
+                            diceRolled = 0;
                             game.nextPlayer();
                             playerMoveAnimDone = 0;
                         }

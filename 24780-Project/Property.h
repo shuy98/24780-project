@@ -17,6 +17,7 @@ class Property {
     }
     std::string getName() const { return name; }
     int getPrice() const { return price; }
+    void upgradeRent() { rent = rent * 2; }
     int getRent() const { return rent; }
     int getOwnerID() const { return ownerID; }
     void setOwnerID(int id) { ownerID = id; }
