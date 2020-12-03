@@ -1,14 +1,17 @@
  # 24780 Group Project  
  This github repo manages 24780 Group Project.
  
- Please replace the following dependencies by your platform specific ones.  
+ Please replace the following dependencies with your platform specific ones.  
  ```
-     .../fssimplewindow.cpp  
-     .../fssimplewindow.h  
-     .../ysglfontdata.c  
-     .../ysglfontdata.h  
-     .../yspng.cpp  
-     .../yspng.h  
+ .../fssimplewindow.cpp  
+ .../fssimplewindow.h  
+ .../ysglfontdata.c  
+ .../ysglfontdata.h  
+ .../yspng.cpp  
+ .../yspng.h  
+ .../yssimplesound.cpp  
+ .../yssimplesound.h  
+ .../yssimplesound_dsound.cpp
  ```
      
  Main entry point: 
