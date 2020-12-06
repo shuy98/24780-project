@@ -19,4 +19,4 @@ This release version was tested under Windows MSVC Compiler Version 19.28.29334 
  ```
  cl .\*.cpp .\*.c /I"include/" /Fe"bin/c++opoly" /Fo"obj/"
  ```  
- Then change directory to `bin`, and execute `c++opoly` to start the game.
+ Then change directory to `bin/`, and execute `c++opoly` to start the game.
