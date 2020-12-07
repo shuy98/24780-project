@@ -57,31 +57,4 @@ class GamePiece {
     YsRawPngDecoder _png;
 };
 
-/**
- * @brief A simple test file illustrate how to use the class.
- */
-int TestGamePiece() {
-    GamePiece gp1(1);
-    GamePiece gp2(2);
-    GamePiece gp4(4);
-
-    FsOpenWindow(0, 0, 800, 600, 1);
-    for (;;) {
-        FsPollDevice();
-        auto key = FsInkey();
-        if (FSKEY_ESC == key) {
-            break;
-        }
-
-        gp1.Draw(10, 20);
-        gp2.Draw(300, 300);
-        gp4.Draw(500, 200);
-
-        FsSwapBuffers();
-
-        FsSleep(10);
-    }
-    return 1; // test is over
-};
-
 #endif // PROJ24780_GAME_PIECE_H_

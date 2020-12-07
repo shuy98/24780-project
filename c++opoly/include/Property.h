@@ -15,6 +15,7 @@ class Property {
         : name(name), price(price), rent(rent), position(pos) {
         ownerID = -1;
     }
+    Property() : name(""), price(-1), rent(-1), position(-1), ownerID(-1) {}
     std::string getName() const { return name; }
     int getPrice() const { return price; }
     void upgradeRent() { rent = rent * 2; }

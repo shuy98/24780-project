@@ -79,6 +79,7 @@ class Game {
                 return p;
             }
         }
+        return Property();
     }
     void nextPlayer() {
         currPlayerID++;
@@ -172,4 +173,4 @@ class Game {
     }
 };
 
-#endif GAME_H
+#endif

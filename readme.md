@@ -14,7 +14,9 @@
  .../yssimplesound_dsound.cpp
  ```
      
- Main entry point: 
+**Compile Instruction**:  
+This release version was tested under Windows MSVC Compiler Version 19.28.29334 for x86. After downloading the package, change directory to `c++opoly/`, then run the following command in terminal.
  ```
- .../main.cpp
- ```
+ cl ./*.cpp ./*.c /I"include/" /Fe"bin/c++opoly" /Fo"obj/"
+ ```  
+ Then change directory to `bin/`, and execute `c++opoly` to start the game.

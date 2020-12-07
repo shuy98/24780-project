@@ -5,8 +5,9 @@
 #include <vector>
 #include "Game.h"
 #include "Player.h"
-#include "Dice.hpp"
-#include "GamePiece.hpp"
+#include "Dice.h"
+#include "GamePiece.h"
+#include <stdio.h>
 
 int GSx[20];
 int GSy[20];
@@ -678,7 +679,7 @@ void DrawGamePieces(const std::vector<Player>& players, Game& game, int* done) {
                 *done = 1;
             }
         }
-        GamePiece gp = GamePiece(playerID + 1);
+        GamePiece gp(playerID + 1);
         int x = 0;
         int y = 0;
         if (playerID == 0) {
@@ -1050,11 +1051,6 @@ void DrawPayMoney(const std::vector<Player> &players, const int PlayerNumLose,
     glColor3ub(0, 0, 0);
     glRasterPos2i(900, 475);
     YsGlDrawFontBitmap10x14(Summary);
-}
-
-void InitializeSFX()
-{
-
 }
 
 int main(void) {
